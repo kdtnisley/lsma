@@ -5,7 +5,7 @@ include <BOSL2/screws.scad>
 //constants
 d_arm = 12.5; //mm
 w = 3; //standard wall thickness
-support = 10; //thickness of vertical support
+support = 17; //thickness of vertical support
 orifice_length = support + 40;
 $fa=2;
 $fs=2;
