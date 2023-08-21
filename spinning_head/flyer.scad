@@ -32,5 +32,5 @@ nut_trap_inline(10, "1/2");
    
 translate([-d_arm,0,0])
 rotate([0,90,0])
-cylinder(d=d_arm+2*w, h=w,center = false,$fn=10);
+cylinder(d=d_arm+2*w, h=w,center = false,$fn=12);
 }
