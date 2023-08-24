@@ -6,7 +6,7 @@ include <BOSL2/screws.scad>
 arm_slop = 0; //mm
 d_arm = 13; //mm
 w = 2.5; //standard wall thickness
-f_h = 3.5 * INCH; //length of flyer tip to tip
+f_h = 4 * INCH; //length of flyer tip to tip
 set_screw = 4; //mm
 $fa=2;
 $fs=2;
