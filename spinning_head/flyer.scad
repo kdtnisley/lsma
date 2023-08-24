@@ -3,9 +3,9 @@ include <modules.scad>
 include <BOSL2/screws.scad>
 
 //constants
-arm_slop = 2; //mm
-d_arm = 12.5+arm_slop; //mm
-w = 3; //standard wall thickness
+arm_slop = 0; //mm
+d_arm = 13; //mm
+w = 2.5; //standard wall thickness
 f_h = 3.5 * INCH; //length of flyer tip to tip
 set_screw = 4; //mm
 $fa=2;
@@ -38,7 +38,7 @@ union(){
 
 //bolt head = nut trap
 rotate([0,90,0])
-nut_trap_inline(15, "1/2");
+nut_trap_inline(15, "1/2", $slop=-.1);
 
 //orifice trap   
 translate([-d_arm+1,0,0])
@@ -55,7 +55,7 @@ cylinder(h = d_arm,d=d_arm,center=true);
 
 //set screw holes in arm sockets
 translate([d_arm/3,0,f_h/2+d_arm/2])
-cylinder(h=w*2,d=set_screw,center=true);
+cylinder(h=w*2,d1=set_screw-1,d2=set_screw+2,center=true,$fn=15);
 translate([d_arm/3,0,-(f_h/2+d_arm/2)])
-cylinder(h=w*2,d=set_screw,center=true);
+cylinder(h=w*2,d1=set_screw+2,d2=set_screw-1,center=true,$fn=15);
 }
