@@ -7,32 +7,47 @@ w = 5; //default spoke thickness
 shaft = 12.7; //1/2 inch bolt OD
 tube = 21.5; //nylon spacer OD
 b_od = 70; //bobbin OD about 3 inches
-w_od = 65; //whorl race id about 2.5 inches
 numRings = 7;
+d = 16;
 
+union(){ //outer edge
+up(w/4)
+torus(d_maj = b_od-w, d_min = w,$fn=50);
+rotate([0,0,14.4])
 difference(){
-translate([0,0,w/2]){
+   cylinder(d=b_od, h=w/2,center=true,$fn=50);
+   cylinder(d=b_od-2*w, h=w/2,center=true,$fn=50);
+}}
+
+zrot_copies(n=numRings) //spokes
+translate([tube,0,0])
+onion_ring(d,w);
+
+down(w/4)   //hub
+bobbin_hub(w);
+
+module bobbin_hub(w){
+difference(){
+    cylinder(h=w,d=tube+3,$fn=res);
+    
+    difference(){
+        cylinder(h = w-3,d=tube,$fn=res); //press fit bobbin axle tube
+        cylinder(h = w-3,d=tube-4,$fn=res); //press fit bobbin axle tube
+    }
+    cylinder(h = w,d=shaft,$fn=res); //shaft
+    }
+}
+
+
+module onion_ring(d,w){
 union(){
-   //torus(d_maj = b_od+w, d_min = w,$fn=50);
-   
-   zrot_copies(n=numRings)
-   translate([(b_od)/2-tube+3,0,0])
-   torus(d_maj = (b_od-tube)/2, d_min = w,$fn=25);
-   
-//support cylinders
-translate([0,0,-w/4]){
-   zrot_copies(n=numRings)
-   translate([(b_od)/2-tube+3,0,0])
+up(w/4)
+torus(d_maj = d, d_min = w,$fn=25);
+
 rotate([0,0,7])
 difference(){
-   cylinder(d=(b_od-tube)/2+w, h=w/2,center=true,$fn=25);
-   cylinder(d=(b_od-tube)/2-w, h=w/2,center=true,$fn=25);
+   cylinder(d=d+w, h=w/2,center=true,$fn=25);
+   cylinder(d=d-w, h=w/2,center=true,$fn=25);
 }
-}   
 }
-cylinder(h=w,d=tube+w/2,center=true,$fn=res);
 }
-
-inset(w);
-}
-
