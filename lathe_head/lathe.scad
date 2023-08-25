@@ -10,66 +10,23 @@ df = 76;  //first step
 ds = 203;  //second step
 dc = 76;  //chuck
 
-d_spindle = 5; //axel
+bearingID = 5; // M8/pass through bearing
+bearingOD = 15; //bearing outer diameter
+bearingSD = bearingOD - 2; //dia of dust shield for bearing
+alignOD = 10; //OD of alignment shaft
 
 w = 3;
 
-//TODO: turn the tori into full height hollowed cylinders so that it's easy to print
+h_axis = 6*INCH; //height of center of rotating axis from plank
+h_align_ax = 1*INCH; //height of center of alignment axis from plank
+w_stance = 4*INCH; //center to center of attachment holes to plank
+w_pulley = 15; //width of drive pulley, no clearance
 
-//3 inch pully
-union(){
-rotate_extrude(angle = 360, convexity = 2) {
-   translate([df/2,0,0])
-   rotate([0,0,270])
-   belt_race();
-}
-//spokes
-zrot_copies(n=6){
-translate([df/4-d_spindle+1,0,0])
-torus(d_maj = (df-d_spindle)/2, d_min = w,$fn=50);
-}
-} 
+//Live block
+//skin and bez may be useful for profile shape
 
-//8 inch pully
-union(){
-rotate_extrude(angle = 360, convexity = 2) {
-   translate([ds/2,0,0])
-   rotate([0,0,270])
-   belt_race();
-}
-//spokes
-zrot_copies(n=6){
-translate([ds/4-d_spindle+1,0,0])
-torus(d_maj = (ds-d_spindle)/2, d_min = w,$fn=50);
-}
-} 
 
-//slot for belt in pulley
-//for some reason the modules file isn't being found at work
-module belt_race()
-{
-   r_belt = 3;
-   w_track = r_belt*2 + 4;
-   $fn=50;
-   
-   translate([0,r_belt,0])
-   difference(){
-      union(){
-      translate([-w_track/2,-r_belt])
-      square([w_track,r_belt]);
-         
-      translate([-4,0,0])
-      circle(d=(10-6)/2);
-      translate([4,0,0])
-      circle(d=(10-6)/2);
-                  
-      translate([0,-r_belt])
-      difference(){
-      circle(d=w_track);
-      translate([-w_track/2,0])
-      square([w_track,w_track/2]);
-      }
-      }         
-   circle(r=r_belt);
-}
-}
+//Dead head
+
+
+//Anchor block
