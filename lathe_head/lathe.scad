@@ -72,14 +72,21 @@ translate([0,0,h_align_ax])
 rotate([0,90,0])
 cylinder(h=anchor_depth,d=alignOD+2*w,center=true);
 
-//maybe stack it up on polygons? look at the wall options?
-
-up(w/2)
-cube([anchor_depth,40+blockOR*3,w],center=true);
+up(h_align_ax/2)
+cube([anchor_depth,h_align_ax*2+alignOD,h_align_ax],center=true);
 }
 
 //create socket for alignment shaft
 translate([anchor_depth/4,0,h_align_ax])
 rotate([0,90,0])
 cylinder(h=anchor_depth/2,d=alignOD,center=true);
+
+//create wings to anchor the block
+translate([0,h_align_ax+alignOD-w/2,h_align_ax+w])
+rotate([0,90,0])
+cylinder(h=anchor_depth,d=h_align_ax*2,center=true);
+
+translate([0,-(h_align_ax+alignOD-w/2),h_align_ax+w])
+rotate([0,90,0])
+cylinder(h=anchor_depth,d=h_align_ax*2,center=true);
 }
