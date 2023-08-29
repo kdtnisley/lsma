@@ -1,48 +1,43 @@
 include <BOSL2/std.scad>
+include <constants.scad>
 
-//treadle flywheel: 16 in (70 rpm)
-//first step: 3
-//second step: 8
-//spindle driver: 3  (1000 rpm)
+//TODO: make an option for the square drive one
 
-dt = 406; //flywheel
-df = 76;  //first step
-ds = 203;  //second step
-dc = 76;  //chuck
-
-d_spindle = 5; //axel
-
-w = 3;
-
-//TODO: turn the tori into full height hollowed cylinders so that it's easy to print
-
-//3 inch pully
+difference(){
 union(){
+//rim
 rotate_extrude(angle = 360, convexity = 2) {
    translate([df/2,0,0])
    rotate([0,0,270])
    belt_race();
 }
 //spokes
-zrot_copies(n=6){
-translate([df/4-d_spindle+1,0,0])
-torus(d_maj = (df-d_spindle)/2, d_min = w,$fn=50);
-}
+zrot_copies(n=4) //spokes
+translate([df/4,0,0])
+onion_ring(df/2-spindleOD-w+1,w*2,5); //make em just, so chunky
+
+
+//spindle axis
+cylinder(h=7,d=spindleOD+w,center=true,$fa=1);
 } 
 
-//8 inch pully
-union(){
-rotate_extrude(angle = 360, convexity = 2) {
-   translate([ds/2,0,0])
-   rotate([0,0,270])
-   belt_race();
+//spindle pass through
+cylinder(h=20,d=spindleOD,center=true,$fa=1);
 }
-//spokes
-zrot_copies(n=6){
-translate([ds/4-d_spindle+1,0,0])
-torus(d_maj = (ds-d_spindle)/2, d_min = w,$fn=50);
-}
-} 
+
+//8 inch pulley
+//union(){
+//rotate_extrude(angle = 360, convexity = 2) {
+//   translate([ds/2,0,0])
+//   rotate([0,0,270])
+//   belt_race();
+//}
+////spokes
+//zrot_copies(n=6){
+//translate([ds/4-d_spindle+1,0,0])
+//torus(d_maj = (ds-d_spindle)/2, d_min = w,$fn=50);
+//}
+//} 
 
 //slot for belt in pulley
 //for some reason the modules file isn't being found at work
@@ -71,5 +66,19 @@ module belt_race()
       }
       }         
    circle(r=r_belt);
+}
+}
+
+module onion_ring(d,w,h){
+union(){
+
+torus(d_maj = d, d_min = w,$fn=25);
+
+rotate([0,0,7])
+down(h/2)
+difference(){
+   cylinder(d=d+w, h=h,center=true,$fn=25);
+   cylinder(d=d-w, h=h,center=true,$fn=25);
+}
 }
 }
