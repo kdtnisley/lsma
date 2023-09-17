@@ -1,5 +1,6 @@
 include <BOSL2/std.scad>
 include <modules.scad>
+include <ShapesNPaths/parametric_pulley.scad>
 
 res = 50;
 w = 5; //default spoke thickness
@@ -11,7 +12,8 @@ b_od = 2.75*INCH; //bobbin OD about 3 inches
 numRings = 7;
 d = 16;
 
-union(){ //outer edge
+union(){
+//outer edge
 up(w/4)
 torus(d_maj = b_od-w, d_min = w,$fn=50);
 rotate([0,0,14.4])
@@ -20,15 +22,17 @@ difference(){
    cylinder(d=b_od-2*w, h=w/2,center=true,$fn=50);
 }
 
-zrot_copies(n=numRings) //spokes
-translate([tube,0,0])
-onion_ring(d,w);
+//spokes
+zrot_copies(n=numRings)
+translate([tube,0,1.25])
+onion_ring(b_od/2-(tube+3)/2,4,w/2,0); //d,w,h,race_wall_thickness
 
-down(w/4)   //hub
+//hub
+down(w/4)   
 bobbin_hub(w);
 }
 
-//brake
+//brake (uncomment to enable)
 //translate([0,0,w+1])
 //belt_race_3D(19,3,w/2);
 
@@ -42,18 +46,4 @@ difference(){
     }
     cylinder(h = w,d=shaft,$fn=res); //shaft
     }
-}
-
-
-module onion_ring(d,w){
-union(){
-up(w/4)
-torus(d_maj = d, d_min = w,$fn=25);
-
-rotate([0,0,7])
-difference(){
-   cylinder(d=d+w, h=w/2,center=true,$fn=25);
-   cylinder(d=d-w, h=w/2,center=true,$fn=25);
-}
-}
 }
