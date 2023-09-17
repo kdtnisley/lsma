@@ -1,6 +1,5 @@
 include <BOSL2/std.scad>
-//include <modules.scad>
-include <parametric_pulley.scad>
+include <ShapesNPaths/parametric_pulley.scad>
 
 pulley_D = 2*INCH;
 belt_width = 6;
