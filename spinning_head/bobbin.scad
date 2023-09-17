@@ -7,7 +7,7 @@ w = 5; //default spoke thickness
 shaft = 12.7; //1/2 inch bolt OD
 tube = 21.5; //nylon spacer OD
 tubeID = 15;
-b_od = 3*INCH; //bobbin OD about 3 inches
+b_od = 2.75*INCH; //bobbin OD about 3 inches
 numRings = 7;
 d = 16;
 
@@ -29,24 +29,16 @@ bobbin_hub(w);
 }
 
 //brake
-difference(){
-up(w+.5)
-scale([1,1,0.5])
- rotate_extrude(angle = 360, convexity = 2) {
-    translate([7,0,0])
-    rotate([0,0,270])
-    belt_race();
- } 
-cylinder(h=20,d=shaft,$fn=50);
-}
+//translate([0,0,w+1])
+//belt_race_3D(19,3,w/2);
 
 module bobbin_hub(w){
 difference(){
     cylinder(h=w,d=tube+3,$fn=res);
     
     difference(){
-        cylinder(h = w-3,d=tube,$fn=res); //press fit bobbin axle tube
-        cylinder(h = w-3,d=tubeID,$fn=res); //press fit bobbin axle tube
+        cylinder(h = w-2,d=tube,$fn=res); //press fit bobbin axle tube
+        cylinder(h = w-2,d=tubeID,$fn=res); //press fit bobbin axle tube
     }
     cylinder(h = w,d=shaft,$fn=res); //shaft
     }

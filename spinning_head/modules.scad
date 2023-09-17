@@ -1,5 +1,29 @@
 include <BOSL2/std.scad>
 
+
+module belt_race_3D(pulley_D,belt_width,w){
+union(){
+//create rim of the pulley_______________________
+path = arc(angle=[0,180], d=belt_width+w,$fn=25);
+circ = circle(d=w,$fn=10);
+rotate_extrude(){
+//create the diameter of the pulley
+translate([pulley_D/2-w,0,0])
+//end create pulley rim 
+
+//turn the 3D model of the belt channel back into a 2D shape
+translate([belt_width/2+w,0,0])
+rotate([0,0,90])
+projection(cut = true)
+union(){
+    path_sweep(circ,path,caps=true);
+    xcopies(belt_width+w) sphere(d=w,$fn=10);
+}
+}//end create pulley rimpath_sweep
+}
+}
+
+
 module joint_capsule(bottom_round)
 {
 difference() {
