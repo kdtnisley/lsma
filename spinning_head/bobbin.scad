@@ -5,7 +5,7 @@ include <ShapesNPaths/parametric_pulley.scad>
 res = 50;
 w = 5; //default spoke thickness
 
-shaft = 12.7; //1/2 inch bolt OD
+shaft = 13.7; //1/2 inch bolt OD plus 1 mm slop
 tube = 21.5; //nylon spacer OD
 tubeID = 15;
 b_od = 2.75*INCH; //bobbin OD about 3 inches
