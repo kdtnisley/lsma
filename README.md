@@ -25,16 +25,16 @@ printable parts
 tools needed
  - flat file
  - sandpaper
- - drill (if you care about pilot drilling holes)
+ - drill
  - saw (to cut maidens to size)
 
 ### Lathe Head
 parts to create a lathe that fits on a sewing machine treadle base
 printable parts
  - chuck: https://www.thingiverse.com/thing:2670620/files
- - chuck block
- - dead head
- - fixed block
+ - headstock
+ - tailstock
+ - anchor block(s)
  - drive pulley (to mount to [] part of carriage bolt)
  - retainer to drive pulley
 OTS parts
@@ -44,4 +44,9 @@ OTS parts
 
 ### skutching head
 parts to create an automated skutching board that fits on a sewing machine treadle base
+ - side plates/alignment plates
+ - bracket to align and connect side plates
+ - superstructure(s) to hold and align gear teeth and shields
+ - drive pulley
+ - axles 
 
