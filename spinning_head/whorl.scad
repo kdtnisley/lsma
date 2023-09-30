@@ -4,7 +4,7 @@ include <ShapesNPaths/parametric_pulley.scad>
 
 res = 50;
 
-pulley_D = 2.5*INCH; //whorl race ID 2.5 in
+pulley_D = 4*INCH; //whorl race ID 2.5 in
 belt_width = 6;
 axle_D = 12.7; //1/2 inch bolt OD
 w = 2.5;
