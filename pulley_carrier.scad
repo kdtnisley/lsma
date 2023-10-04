@@ -1,5 +1,5 @@
 include <BOSL2/std.scad>
-include <skutching_anchor.scad>
+include <bearing.scad>
 
 
 //TODO: clean these constants up wow
@@ -35,11 +35,16 @@ cube(size=[h_thick,h_width,frame], center=true)
 
 translate([h_thick/2+frame/2,0,frame/2])
 rotate([0,0,90])
-anchor(wall=3,air=axle/2,width=frame,sir=3);
+bearing(wall=3,air=axle/2,width=frame,sir=3);
 
 translate([-(h_thick/2+frame/2),0,frame/2])
 rotate([0,0,90])
-anchor(wall=3,air=axle/2,width=frame,sir=3);
+bearing(wall=3,air=axle/2,width=frame,sir=3);
+
+//extra width bearing
+translate([(f_length/2+INCH)-frame/2,0,frame/2])
+rotate([0,0,90])
+bearing(wall=3,air=axle/2,width=frame,sir=3);
 
 //TODO: extended width
 if (ew)

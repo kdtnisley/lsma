@@ -8,9 +8,10 @@
 $fn=25;
 include <BOSL2/std.scad>
 
-//anchor(wall=2,air=3,width=10,sir=2);
+//0->no cap, 1->cap on left, 2->cap on right
+//bearing(wall=2,air=3,width=10,sir=2);
 
-module anchor(wall=2,air=3,width=10,sir=2)
+module bearing(wall=2,air=3,width=10,sir=2)
 {
     aor = air + wall; //outside radius of housing
     length = aor * 2 * 3; //make diameter, make three x diameter, length of baseplate of housing
@@ -32,7 +33,7 @@ module anchor(wall=2,air=3,width=10,sir=2)
     }
     
     //remove axle
-    translate([0,0,aor])
+    translate([0,0,aor]) //aor       
     rotate([90,0,0])
     cylinder(h=width, r=air, center=true);
     
@@ -54,4 +55,4 @@ module anchor(wall=2,air=3,width=10,sir=2)
     }
 }
 
-function anchor(wall=2,air=3,width=10,sir=2) = no_function("anchor");
+function bearing(wall=2,air=3,width=10,sir=2) = no_function("bearing");
