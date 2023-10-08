@@ -19,7 +19,7 @@ include <bearing.scad>
 
 module carrier(p_width=50,p_thick=10,clearance=5,frame=10,axle=12)
 {
-h_width = p_width + clearance;
+h_width = p_width + clearance*2;
 h_thick = p_thick + clearance;
 
 f_width = h_width + 2*frame;

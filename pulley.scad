@@ -41,9 +41,10 @@ union(){
 }//end create pulley rim
 
 //create axle pass through______________________
+down((belt_width+2*w)/4)
 difference(){
-    cylinder(h=belt_width+2*w, d=hub_D,center=true);
-    cylinder(h=belt_width+2*w, d=axle_D,center=true);
+    cylinder(h=(belt_width+2*w)/2, d=hub_D,center=true);
+    cylinder(h=(belt_width+2*w)/2, d=axle_D,center=true);
 } //end axle pass through
 } //end union 
 }
@@ -61,4 +62,4 @@ difference(){
    cylinder(d=d-2*w, h=h,center=true,$fn=25);
 }
 }
-}
+}//end spoke module
