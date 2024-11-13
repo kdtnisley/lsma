@@ -3,10 +3,10 @@ include <modules.scad>
 include <BOSL2/screws.scad>
 
 //constants
-d_arm = 12.5; //mm
-w = 3; //standard wall thickness
+d_arm = 1.5*INCH; //mm
+w = 5; //standard wall thickness
 support = 17; //thickness of vertical support
-orifice_length = support + 40;
+orifice_length = support + 40 + d_arm;
 $fa=2;
 $fs=2;
 
@@ -19,10 +19,10 @@ difference() {
   up(orifice_length) rounding_hole_mask(d=d_arm-.2, rounding=2,$fn=100);
 
 //side holes
-up(orifice_length-support-25)    
+up(orifice_length-support-orifice_length/2)    
 union(){
     rotate([90,0,0])
-    cylinder(h=d_arm+2*w, d=10,center=true,$fn=50);
+    cylinder(h=d_arm+2*w, d=d_arm,center=true,$fn=50);
     
     //outside smoothing
     translate([0,-(d_arm+2*w)/2,0])
